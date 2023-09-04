@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: golist-db
+  labels:
+    app: golist-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: golist-db
+  template:
+    metadata:
+      labels:
+        app: golist-db
+    spec:
+      containers:
+        - name: golist-db
+          image: saianilkumardeyyala/qod-db
+          imagePullPolicy: Always
+          ports:
+            - name: mysql
+              containerPort: 3306
+              protocol: TCP
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
